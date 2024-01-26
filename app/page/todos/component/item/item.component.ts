@@ -14,6 +14,12 @@ export class TodoItem extends Component {
   }
 
   @step()
+  async deleteTodo ({ level }: { level?: number }): Promise<void> {
+    await this.title(level).hover()
+    await this.deleteButton(level).click()
+  }
+
+  @step()
   async updateTodo (text: string): Promise<void> {
     await this.editableItemInput.fill(text)
     await this.editableItemInput.press('Enter')
@@ -30,5 +36,11 @@ export class TodoItem extends Component {
   async expectLoaded ({ level, itemText }: { level?: number, itemText: string }): Promise<void> {
     await expect(this.checkMark(level)).toBeVisible()
     await expect(this.title(level)).toHaveText(itemText)
+  }
+
+  @step()
+  async expectNotLoaded ({ level }: { level?: number }): Promise<void> {
+    await expect(this.checkMark(level)).toHaveCount(0)
+    await expect(this.title(level)).toHaveCount(0)
   }
 }
