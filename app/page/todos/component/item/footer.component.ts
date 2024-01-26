@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test'
-import { Component } from '../../../abstractClasses'
-import { step } from '../../../../utils/stepDecorator'
+import { Component } from '../../../../abstractClasses'
+import { step } from '../../../../../utils/stepDecorator'
 
-export class TodoFooter extends Component {
+export class TodoItemFooter extends Component {
   private readonly itemsCount = this.page.getByRole('strong')
   private readonly filters = {
     all: this.page.locator('.filters li').nth(0),

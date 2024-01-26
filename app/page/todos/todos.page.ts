@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test'
-import { Footer, TodoFooter, TodoItem, Warning } from './component'
+import { Footer, Warning, TodoItem, TodoItemFooter } from './component'
 import { AppPage } from '../../abstractClasses'
 import { step } from '../../../utils/stepDecorator'
 
@@ -7,9 +7,9 @@ export class Todos extends AppPage {
   public pagePath = '/todomvc'
 
   public readonly footer = new Footer(this.page)
-  public readonly todoFooter = new TodoFooter(this.page)
-  public readonly todoItem = new TodoItem(this.page)
   public readonly warning = new Warning(this.page)
+  public readonly todoItemFooter = new TodoItemFooter(this.page)
+  public readonly todoItem = new TodoItem(this.page)
 
   private readonly heading = this.page.getByRole('heading')
   private readonly input = this.page.locator('.new-todo')

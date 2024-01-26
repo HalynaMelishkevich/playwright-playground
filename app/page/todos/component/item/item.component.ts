@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test'
-import { Component } from '../../../abstractClasses'
-import { step } from '../../../../utils/stepDecorator'
+import { Component } from '../../../../abstractClasses'
+import { step } from '../../../../../utils/stepDecorator'
 
 export class TodoItem extends Component {
   private readonly checkMark = this.page.locator('.toggle')
