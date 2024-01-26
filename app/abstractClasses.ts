@@ -7,7 +7,7 @@ export abstract class PageHolder {
 }
 
 export abstract class Component extends PageHolder {
-  abstract expectLoaded (message?: string): Promise<void>
+  abstract expectLoaded (argsObject?: any): Promise<void>
 
   @step()
   async isLoaded (): Promise<boolean> {

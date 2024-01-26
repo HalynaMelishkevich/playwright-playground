@@ -1,16 +1,16 @@
-import { expect } from '@playwright/test'
+import { expect, type Locator } from '@playwright/test'
 import { Component } from '../../../../abstractClasses'
 import { step } from '../../../../../utils/stepDecorator'
 
 export class TodoItem extends Component {
-  private readonly checkMark = this.page.locator('.toggle')
-  private readonly title = this.page.locator('.todo-list label')
-  private readonly deleteButton = this.page.locator('.destroy')
+  private readonly checkMark = (level: number = 0): Locator => this.page.locator('.todo-list .toggle').nth(level)
+  private readonly title = (level: number = 0): Locator => this.page.locator('.todo-list label').nth(level)
+  private readonly deleteButton = (level: number = 0): Locator => this.page.locator('.todo-list .destroy').nth(level)
   private readonly editableItemInput = this.page.locator('.todo-list .edit')
 
   @step()
-  async clickTitle (): Promise<void> {
-    await this.title.dblclick()
+  async clickTitle ({ level }: { level?: number }): Promise<void> {
+    await this.title(level).dblclick()
   }
 
   @step()
@@ -20,15 +20,15 @@ export class TodoItem extends Component {
   }
 
   @step()
-  async expectEditable (): Promise<void> {
-    await expect(this.checkMark).toBeVisible({ visible: false })
-    await expect(this.deleteButton).toBeVisible({ visible: false })
-    await expect(this.title).toBeEditable()
+  async expectEditable ({ level }: { level?: number }): Promise<void> {
+    await expect(this.checkMark(level)).toBeVisible({ visible: false })
+    await expect(this.deleteButton(level)).toBeVisible({ visible: false })
+    await expect(this.title(level)).toBeEditable()
   }
 
   @step()
-  async expectLoaded (itemText: string): Promise<void> {
-    await expect(this.checkMark).toBeVisible()
-    await expect(this.title).toHaveText(itemText)
+  async expectLoaded ({ level, itemText }: { level?: number, itemText: string }): Promise<void> {
+    await expect(this.checkMark(level)).toBeVisible()
+    await expect(this.title(level)).toHaveText(itemText)
   }
 }

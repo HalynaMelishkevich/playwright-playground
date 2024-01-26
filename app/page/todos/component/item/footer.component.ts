@@ -11,8 +11,8 @@ export class TodoItemFooter extends Component {
   }
 
   @step()
-  async expectLoaded (message = 'Expected ToDo Footer to load'): Promise<void> {
-    await expect(this.itemsCount).toBeVisible()
+  async expectLoaded (itemsCount?: string): Promise<void> {
+    await expect(this.itemsCount, itemsCount).toBeVisible()
     await expect(this.filters.all, 'All').toBeVisible()
     await expect(this.filters.active, 'Active').toBeVisible()
     await expect(this.filters.completed, 'Completed').toBeVisible()
