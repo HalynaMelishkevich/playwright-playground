@@ -16,14 +16,14 @@ export class Todos extends AppPage {
   private readonly todosList = this.page.getByRole('list')
 
   @step()
-  async expectLoaded (): Promise<void> {
-    await expect(this.heading, 'todos').toBeVisible()
-    await expect(this.input, 'What needs to be done?').toBeVisible()
-  }
-
-  @step()
   async addTodo (text: string): Promise<void> {
     await this.input.fill(text)
     await this.input.press('Enter')
+  }
+
+  @step()
+  async expectLoaded (): Promise<void> {
+    await expect(this.heading, 'todos').toBeVisible()
+    await expect(this.input, 'What needs to be done?').toBeVisible()
   }
 }

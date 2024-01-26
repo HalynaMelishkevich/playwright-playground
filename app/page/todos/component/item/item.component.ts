@@ -20,15 +20,15 @@ export class TodoItem extends Component {
   }
 
   @step()
-  async expectLoaded (itemText: string): Promise<void> {
-    await expect(this.checkMark).toBeVisible()
-    await expect(this.title).toHaveText(itemText)
-  }
-
-  @step()
   async expectEditable (): Promise<void> {
     await expect(this.checkMark).toBeVisible({ visible: false })
     await expect(this.deleteButton).toBeVisible({ visible: false })
     await expect(this.title).toBeEditable()
+  }
+
+  @step()
+  async expectLoaded (itemText: string): Promise<void> {
+    await expect(this.checkMark).toBeVisible()
+    await expect(this.title).toHaveText(itemText)
   }
 }
