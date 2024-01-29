@@ -17,4 +17,9 @@ export class TodoItemFooter extends Component {
     await expect(this.filters.active, 'Active').toBeVisible()
     await expect(this.filters.completed, 'Completed').toBeVisible()
   }
+
+  @step()
+  async clickFilter ({ option }: { option: 'all' | 'active' | 'completed' }): Promise<void> {
+    await this.filters[option].click()
+  }
 }
